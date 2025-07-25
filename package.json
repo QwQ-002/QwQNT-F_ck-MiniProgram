@@ -1,8 +1,8 @@
 {
   "$schema": "./plugin.schema.json",
-  "name": "ipc-logger-devtools",
+  "name": "f_ck-miniprogram",
   "main": "./dist/main.js",
-  "description": "去你妈的小程序",
+  "description": "去你大爷的小程序",
   "version": "0.0.1",
   "scripts": {
     "build": "node esbuild.config.mjs"
@@ -15,7 +15,7 @@
   ],
   "type": "commonjs",
   "qwqnt": {
-    "name": "去你妈的小程序"
+    "name": "去你大爷的小程序"
   },
   "dependencies": {
     "esbuild": "^0.25.8"
