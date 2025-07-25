@@ -1,0 +1,18 @@
+{
+  "manifest_version": 4,
+  "type": "extension",
+  "name": "F*ck-MiniProgram",
+  "slug": "F_ck-MiniProgram",
+  "description": "去你妈的小程序",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "曦月",
+      "link": "https://github.com/xiyuesaves"
+    }
+  ],
+  "platform": ["win32", "linux", "darwin"],
+  "injects": {
+    "main": "./dist/main.js"
+  }
+}

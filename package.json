@@ -1,0 +1,23 @@
+{
+  "$schema": "./plugin.schema.json",
+  "name": "ipc-logger-devtools",
+  "main": "./dist/main.js",
+  "description": "去你妈的小程序",
+  "version": "0.0.1",
+  "scripts": {
+    "build": "node esbuild.config.mjs"
+  },
+  "authors": [
+    {
+      "name": "曦月",
+      "link": "https://github.com/xiyuesaves"
+    }
+  ],
+  "type": "commonjs",
+  "qwqnt": {
+    "name": "去你妈的小程序"
+  },
+  "dependencies": {
+    "esbuild": "^0.25.8"
+  }
+}
