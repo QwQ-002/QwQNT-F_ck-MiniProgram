@@ -19,23 +19,26 @@ function replaceMiniAppArk(args) {
   // 接收到获取历史消息列表
   const msgList = args[2]?.msgList;
   if (msgList && msgList.length && checkChatType(msgList[0])) {
+    log("命中聊天记录事件");
     replaceMsgList(msgList);
   }
   // 接收到的新消息
   const onRecvMsg = findEvent(args, [
     "nodeIKernelMsgListener/onRecvMsg",
     "nodeIKernelMsgListener/onRecvActiveMsg",
+    "nodeIKernelMsgListener/onMsgInfoListUpdate",
     "nodeIKernelMsgListener/onActiveMsgInfoUpdate",
   ]);
   if (onRecvMsg && checkChatType(args?.[2]?.payload?.msgList?.[0])) {
-    log("命中聊天记录事件");
+    log("命中更新聊天记录事件");
     replaceMsgList(args[2].payload.msgList);
   }
 
   // 转发消息
-  const onForwardMsg = findEventIndex(args, "nodeIKernelMsgListener/onAddSendMsg");
-  if (onForwardMsg >= 0 && checkChatType(args?.[2]?.[onForwardMsg]?.payload?.msgRecord)) {
-    replaceMsgList([args[2][onForwardMsg].payload.msgRecord]);
+  const onForwardMsg = findEvent(args, "nodeIKernelMsgListener/onAddSendMsg");
+  if (onForwardMsg && checkChatType(args?.[2]?.payload?.msgRecord)) {
+    log("命中自身转发消息事件");
+    replaceMsgList([args[2].payload.msgRecord]);
   }
 }
 
