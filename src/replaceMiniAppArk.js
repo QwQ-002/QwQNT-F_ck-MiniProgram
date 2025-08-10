@@ -6,7 +6,7 @@ const log = (...args) => {
   if (global.cacheLogs) {
     global.cacheLogs.push(args);
   }
-  console.log(...args);
+  console.log("[替换小程序卡片]", ...args);
 };
 
 /**
@@ -15,7 +15,7 @@ const log = (...args) => {
  * @param {Array} args - 包含小程序卡片的参数数组。
  * @return {void} 此函数不返回任何值。
  */
-function replaceMiniAppArk(args) {
+function replaceMiniAppArk(...args) {
   // 接收到获取历史消息列表
   const msgList = args[2]?.msgList;
   if (msgList && msgList.length && checkChatType(msgList[0])) {
