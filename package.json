@@ -15,7 +15,10 @@
   ],
   "type": "commonjs",
   "qwqnt": {
-    "name": "去你大爷的小程序"
+    "name": "去你大爷的小程序",
+    "dependencies": {
+      "ipc_interceptor": "^0.0.1"
+    }
   },
   "dependencies": {
     "esbuild": "^0.25.8"
