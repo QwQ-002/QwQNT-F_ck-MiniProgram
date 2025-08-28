@@ -1,3 +1,4 @@
+import { findEvent } from "./findEventIndex.js";
 import { checkChatType } from "./checkChatType.js";
 import { replaceArk } from "./replaceArk.js";
 
@@ -18,7 +19,7 @@ function replaceMiniAppArk(...args) {
   // 接收到获取历史消息列表
   const msgList = args[2]?.msgList;
   if (msgList && msgList.length && checkChatType(msgList[0])) {
-    log("命中聊天记录事件");
+    // log("命中聊天记录事件");
     replaceMsgList(msgList);
   }
   // 接收到的新消息
@@ -29,14 +30,14 @@ function replaceMiniAppArk(...args) {
     "nodeIKernelMsgListener/onActiveMsgInfoUpdate",
   ]);
   if (onRecvMsg && checkChatType(args?.[2]?.payload?.msgList?.[0])) {
-    log("命中更新聊天记录事件");
+    // log("命中更新聊天记录事件");
     replaceMsgList(args[2].payload.msgList);
   }
 
   // 转发消息
   const onForwardMsg = findEvent(args, "nodeIKernelMsgListener/onAddSendMsg");
   if (onForwardMsg && checkChatType(args?.[2]?.payload?.msgRecord)) {
-    log("命中自身转发消息事件");
+    // log("命中自身转发消息事件");
     replaceMsgList([args[2].payload.msgRecord]);
   }
 }
@@ -48,19 +49,24 @@ function replaceMiniAppArk(...args) {
  * @return {void} 此函数不返回任何内容。
  */
 function replaceMsgList(msgList) {
-  msgList.forEach((msgItem) => {
-    let msg_seq = msgItem.msgSeq;
-    // 遍历消息内容数组
-    msgItem.elements.forEach((msgElements) => {
-      // 替换历史消息中的小程序卡片
-      if (msgElements?.arkElement?.bytesData) {
-        const json = JSON.parse(msgElements.arkElement.bytesData);
-        if (json?.prompt?.includes("[QQ小程序]")) {
-          msgElements.arkElement.bytesData = replaceArk(json, msg_seq);
+  try {
+    msgList.forEach((msgItem) => {
+      let msg_seq = msgItem.msgSeq;
+      // 遍历消息内容数组
+      msgItem.elements.forEach((msgElements) => {
+        // 替换历史消息中的小程序卡片
+        if (msgElements?.arkElement?.bytesData) {
+          const json = JSON.parse(msgElements.arkElement.bytesData);
+          if (json?.prompt?.includes("[QQ小程序]")) {
+            msgElements.arkElement.bytesData = replaceArk(json, msg_seq);
+            log("替换小程序卡片成功");
+          }
         }
-      }
+      });
     });
-  });
+  } catch (err) {
+    log("出现错误：", err);
+  }
 }
 
 export { replaceMiniAppArk, log };
