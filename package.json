@@ -3,7 +3,7 @@
   "name": "f_ck-miniprogram",
   "main": "./dist/main.js",
   "description": "去你大爷的小程序",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "build": "node esbuild.config.mjs"
   },
