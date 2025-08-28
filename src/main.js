@@ -1,10 +1,4 @@
-import { replaceMiniAppArk } from "./replaceMiniAppArk.js";
-const log = (...args) => {
-  if (global.cacheLogs) {
-    global.cacheLogs.push(args);
-  }
-  console.log("[替换小程序卡片]", ...args);
-};
+import { replaceMiniAppArk, log } from "./replaceMiniAppArk.js";
 
 try {
   if (global.IpcInterceptor) {

@@ -17,7 +17,8 @@
   "qwqnt": {
     "name": "去你大爷的小程序",
     "dependencies": {
-      "ipc_interceptor": "^0.0.1"
+      "ipc_interceptor": "^0.0.1",
+      "ipc_logger?": "^0.0.3"
     }
   },
   "dependencies": {

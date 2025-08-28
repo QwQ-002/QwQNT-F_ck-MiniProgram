@@ -1,12 +1,12 @@
 import { checkChatType } from "./checkChatType.js";
 import { replaceArk } from "./replaceArk.js";
 
-const log = (...args) => {
-  if (global.cacheLogs) {
-    global.cacheLogs.push(args);
-  }
-  console.log("[替换小程序卡片]", ...args);
-};
+const log =
+  typeof global.Logs === "function"
+    ? new global.Logs("替换小程序卡片")
+    : (...args) => {
+        console.log("[替换小程序卡片]", ...args);
+      };
 
 /**
  * 根据配置替换给定参数中的小程序卡片。
@@ -63,4 +63,4 @@ function replaceMsgList(msgList) {
   });
 }
 
-export { replaceMiniAppArk };
+export { replaceMiniAppArk, log };
